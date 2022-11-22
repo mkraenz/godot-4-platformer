@@ -1,7 +1,7 @@
+class_name Player
 extends KinematicBody2D
 
 var velocity := Vector2.ZERO
-var fast_fall := false
 
 const max_speed := 50.0
 const acceleration := 300.0
@@ -11,10 +11,15 @@ const after_jump_apex__extra_gravity := 2
 const jump_strength = 140
 const jump_release_force = 40
 const max_fall_speed = 200
+const die_over_y = 200
 
 onready var sprite = $AnimatedSprite
 
 func _physics_process(delta):
+	print(position.y)
+	if position.y > die_over_y:
+		die()
+
 	var input_x = Input.get_action_strength("move_right") - \
 		Input.get_action_strength("move_left")
 	if input_x != 0:
@@ -30,7 +35,6 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		velocity.y = 0
-		fast_fall = false
 
 	var jump_input = Input.is_action_just_pressed("jump")
 	var jump_released = Input.is_action_just_released("jump")
@@ -67,3 +71,7 @@ func apply_friction(delta: float):
 func apply_acceleration(input_x: float, delta: float):
 		velocity.x = move_toward(velocity.x, input_x * max_speed, \
 			acceleration * delta)
+
+func die():
+	print("player died")
+	var _a = get_tree().reload_current_scene()
