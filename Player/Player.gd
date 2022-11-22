@@ -6,23 +6,25 @@ var fast_fall := false
 const max_speed := 50.0
 const acceleration := 300.0
 const friction := 400.0
-const gravity := 5
+const gravity := 4
 const after_jump_apex__extra_gravity := 2
 const jump_strength = 140
 const jump_release_force = 40
 
+onready var sprite = $AnimatedSprite
+
 func _physics_process(delta):
-	var input_vec = Vector2.ZERO
-	input_vec.x = Input.get_action_strength("move_right") - \
+	var input_x = Input.get_action_strength("move_right") - \
 		Input.get_action_strength("move_left")
-	if input_vec != Vector2.ZERO:
-		apply_acceleration(input_vec.x, delta)
+	if input_x != 0:
+		sprite.play("run")
+		apply_acceleration(input_x, delta)
 	else:
+		sprite.play("idle")
 		apply_friction(delta)
 		
 	apply_gravity()
 	
-	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	if is_on_floor():
 		velocity.y = 0
@@ -34,12 +36,23 @@ func _physics_process(delta):
 	var is_far_from_apex = velocity.y < -jump_release_force 
 	if is_on_floor() and jump_input:
 		velocity.y = -jump_strength
+	
+	if not is_on_floor():
+		sprite.play("jump")
 		
 	if not is_on_floor() and jump_released and is_far_from_apex:
 		# variable jump height
 		velocity.y = 0
 	if not is_on_floor() and velocity.y > 0:
 		velocity.y += after_jump_apex__extra_gravity
+		
+	var was_in_air = not is_on_floor()
+	velocity = move_and_slide(velocity, Vector2.UP)
+	var just_landed = is_on_floor() and was_in_air
+	if just_landed:
+		# basically we just want to force starting on the idle frame here
+		# so that we do not have a looooong jump / run pose on landing
+		sprite.play("run", true)
 
 func apply_gravity():
 	 velocity.y += gravity
