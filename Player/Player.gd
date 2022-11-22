@@ -10,6 +10,7 @@ const gravity := 4
 const after_jump_apex__extra_gravity := 2
 const jump_strength = 140
 const jump_release_force = 40
+const max_fall_speed = 200
 
 onready var sprite = $AnimatedSprite
 
@@ -19,6 +20,7 @@ func _physics_process(delta):
 	if input_x != 0:
 		sprite.play("run")
 		apply_acceleration(input_x, delta)
+		sprite.flip_h = input_x > 0
 	else:
 		sprite.play("idle")
 		apply_friction(delta)
@@ -56,6 +58,7 @@ func _physics_process(delta):
 
 func apply_gravity():
 	 velocity.y += gravity
+	 velocity.y = min(velocity.y, max_fall_speed)
 
 func apply_friction(delta: float):
 	velocity.x = velocity.move_toward(Vector2.ZERO, \

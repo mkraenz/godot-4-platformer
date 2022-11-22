@@ -26,11 +26,19 @@ position = Vector2( 144, 128 )
 [node name="Block2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 192, 96 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 136, 104 )
+[node name="Block9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 96, 128 )
 
 [node name="Block8" parent="." instance=ExtResource( 1 )]
 position = Vector2( 112, 128 )
 
-[node name="Block9" parent="." instance=ExtResource( 1 )]
-position = Vector2( 96, 128 )
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 136, 104 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Cam")
+
+[node name="Cam" type="Camera2D" parent="."]
+position = Vector2( 136, 104 )
+current = true
+smoothing_enabled = true
