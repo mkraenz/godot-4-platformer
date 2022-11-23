@@ -7,10 +7,11 @@ var direction = Vector2.RIGHT
 
 onready var sprite = $AnimatedSprite
 onready var ledge_check = $LedgeCheck
+onready var hitbox_shape = $Hitbox/HitboxShape
 
 func _ready():
 	sprite.play("walk")
-	sprite.flip_h = direction.x > 0
+	reverse_direction()
 
 func _physics_process(_delta):
 	var found_wall = is_on_wall()
@@ -27,3 +28,6 @@ func reverse_direction():
 	direction *= -1
 	ledge_check.position.x *= -1
 	sprite.flip_h = direction.x > 0
+
+	# the sprite is not perfectly symmetrical
+	hitbox_shape.position.x = 1 if direction.x > 0 else 0
