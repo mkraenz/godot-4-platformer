@@ -10,7 +10,7 @@ const gravity := 4
 const after_jump_apex__extra_gravity := 2
 const jump_strength = 140
 const jump_release_force = 40
-const max_fall_speed = 200
+const max_fall_speed = 200.0
 const die_over_y = 200
 
 onready var sprite = $AnimatedSprite
@@ -31,10 +31,6 @@ func _physics_process(delta):
 		
 	apply_gravity()
 	
-	
-	if is_on_floor():
-		velocity.y = 0
-
 	var jump_input = Input.is_action_just_pressed("jump")
 	var jump_released = Input.is_action_just_released("jump")
 	# the player can somewhat stop the jump but only close to the initial stremf
@@ -52,7 +48,9 @@ func _physics_process(delta):
 		velocity.y += after_jump_apex__extra_gravity
 		
 	var was_in_air = not is_on_floor()
+
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
 	var just_landed = is_on_floor() and was_in_air
 	if just_landed:
 		# basically we just want to force starting on the idle frame here
@@ -72,5 +70,4 @@ func apply_acceleration(input_x: float, delta: float):
 			acceleration * delta)
 
 func die():
-	print("player died")
 	var _a = get_tree().reload_current_scene()
