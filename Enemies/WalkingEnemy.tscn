@@ -34,3 +34,9 @@ animation = "walk"
 visible = false
 position = Vector2( -0.5, -5 )
 shape = SubResource( 4 )
+
+[node name="LedgeCheck" type="RayCast2D" parent="."]
+position = Vector2( 5, -1 )
+enabled = true
+cast_to = Vector2( 0, 2 )
+collide_with_areas = true
