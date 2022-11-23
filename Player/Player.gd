@@ -29,6 +29,8 @@ func _physics_process(delta):
 			climb_state(delta)
 
 func climb_state(_delta: float):
+	reset_double_jump()
+	
 	var input_vec = Input.get_vector("move_left", "move_right", "jump", "move_down")
 	velocity = input_vec * move_data.climb_speed
 	var _a = move_and_slide(velocity, Vector2.UP)
@@ -42,14 +44,17 @@ func climb_state(_delta: float):
 		state = State.Walk
 
 func move_state(delta: float):
-	if is_on_ladder() and Input.is_action_just_pressed("jump"):
+	var jump_input = Input.is_action_just_pressed("jump")
+
+	if is_on_ladder() and jump_input:
 		state = State.Climb
 
-	if position.y > move_data.die_over_y:
+	if is_below_level():
 		die()
 
 	var input_x = Input.get_axis("move_left", "move_right")
-	if input_x != 0:
+	var has_horizontal_input = input_x != 0
+	if has_horizontal_input:
 		sprite.play("run")
 		apply_acceleration(input_x, delta)
 		sprite.flip_h = input_x > 0
@@ -59,31 +64,32 @@ func move_state(delta: float):
 		
 	apply_gravity()
 	
-	var jump_input = Input.is_action_just_pressed("jump")
 	var jump_released = Input.is_action_just_released("jump")
 	# the player can somewhat stop the jump but only close to the initial stremf
 	var is_far_from_apex = velocity.y < -move_data.jump_release_force 
 
 	# regular jump
 	if is_on_floor() or coyote_jump:
-		double_jump = move_data.double_jumps
+		reset_double_jump()
 		if jump_input or buffered_jump:
 			jump()
 	else:
 		sprite.play("jump")
 		# double_jump
 		if jump_input and double_jump > 0:
-			print('double')
 			jump()
 			double_jump -= 1
+		# buffered jump
 		elif jump_input and double_jump == 0:
 			buffered_jump = true
 			jump_buffer_timer.start()
 			
+		# jump release
 		if jump_released and is_far_from_apex:
 			# variable jump height
 			velocity.y = 0
 			
+		# fast fall
 		if velocity.y > 0:
 			velocity.y += move_data.after_jump_apex__extra_gravity
 			
@@ -95,11 +101,10 @@ func move_state(delta: float):
 	var just_left_ground := not is_on_floor() and on_floor_before_moving
 	var just_landed = is_on_floor() and in_air_before_moving
 
-	print(velocity.y)
 	if just_left_ground and velocity.y > 0:
-		print('coyote')
 		coyote_jump = true
 		coyote_jump_timer.start()
+
 	if just_landed:
 		# basically we just want to force starting on the idle frame here
 		# so that we do not have a looooong jump / run pose on landing
@@ -108,6 +113,8 @@ func move_state(delta: float):
 func is_on_ladder() -> bool:
 	return ladders.is_colliding()
 
+func is_below_level() -> bool:
+	return position.y > move_data.die_over_y
 
 func apply_gravity() -> void:
 	 velocity.y += move_data.gravity
@@ -129,7 +136,8 @@ func jump() -> void:
 	buffered_jump = false
 	coyote_jump = false
 
-
+func reset_double_jump() -> void:
+	double_jump = move_data.double_jumps
 
 func _on_CoyoteJumpTimer_timeout() -> void:
 	coyote_jump = false
