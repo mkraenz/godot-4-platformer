@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://characters_packed.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/WalkingEnemy.gd" type="Script" id=2]
+[ext_resource path="res://Common/Hitbox.tscn" type="PackedScene" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -23,6 +24,7 @@ animations = [ {
 extents = Vector2( 5.5, 5 )
 
 [node name="WalkingEnemy" type="KinematicBody2D"]
+collision_layer = 8
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -40,3 +42,8 @@ position = Vector2( 5, -1 )
 enabled = true
 cast_to = Vector2( 0, 2 )
 collide_with_areas = true
+
+[node name="Hitbox" parent="." instance=ExtResource( 3 )]
+
+[node name="HitboxShape" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PoolVector2Array( -1, -16, -2, -14, -2, -12, 1, -12, 1, -14, 0, -16 )
