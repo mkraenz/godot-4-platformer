@@ -6,6 +6,7 @@ export (Resource) var move_data = preload("res://Player/DefaultPlayerMovementDat
 
 onready var sprite := $AnimatedSprite
 onready var ladders := $LadderCheck
+onready var jump_buffer_timer := $JumpBufferTimer
 
 enum State {
 	Walk,
@@ -63,7 +64,7 @@ func move_state(delta: float):
 	# regular jump
 	if is_on_floor():
 		double_jump = move_data.double_jumps
-		if jump_input:
+		if jump_input or buffered_jump:
 			jump()
 	else:
 		sprite.play("jump")
@@ -71,10 +72,9 @@ func move_state(delta: float):
 		if jump_input and double_jump > 0:
 			jump()
 			double_jump -= 1
-
-		if jump_input:
+		elif jump_input and double_jump == 0:
 			buffered_jump = true
-			# jump_buffer_timer.start()
+			jump_buffer_timer.start()
 			
 		if jump_released and is_far_from_apex:
 			# variable jump height
@@ -93,24 +93,29 @@ func move_state(delta: float):
 		# so that we do not have a looooong jump / run pose on landing
 		sprite.play("run", true)
 
-func is_on_ladder():
+func is_on_ladder() -> bool:
 	return ladders.is_colliding()
 
 
-func apply_gravity():
+func apply_gravity() -> void:
 	 velocity.y += move_data.gravity
 	 velocity.y = min(velocity.y, move_data.max_fall_speed)
 
-func apply_friction(delta: float):
+func apply_friction(delta: float) -> void:
 	velocity.x = velocity.move_toward(Vector2.ZERO, \
 		move_data.friction * delta).x
 
-func apply_acceleration(input_x: float, delta: float):
+func apply_acceleration(input_x: float, delta: float) -> void:
 		velocity.x = move_toward(velocity.x, input_x * move_data.max_speed, \
 			move_data.acceleration * delta)
 
-func die():
+func die() -> void:
 	var _a = get_tree().reload_current_scene()
 
-func jump():
+func jump() -> void:
 	velocity.y = -move_data.jump_strength
+	buffered_jump = false
+
+
+func _on_JumpBufferTimer_timeout() -> void:
+	buffered_jump = false
