@@ -1,10 +1,11 @@
 class_name Player
 extends KinematicBody2D
 
-export (Resource) var move_data # : PlayerMovementData
+# hacky way to force autocompletion
+export (Resource) var move_data = preload("res://Player/DefaultPlayerMovementData.tres") as PlayerMovementData
 
-onready var sprite = $AnimatedSprite
-onready var ladders = $LadderCheck
+onready var sprite := $AnimatedSprite
+onready var ladders := $LadderCheck
 
 enum State {
 	Walk,
@@ -12,8 +13,9 @@ enum State {
 }
 
 var velocity := Vector2.ZERO
-var state = State.Walk
-
+var state : int = State.Walk
+var double_jump := 1
+var buffered_jump := false
 
 func _physics_process(delta):
 	match state:
@@ -57,23 +59,35 @@ func move_state(delta: float):
 	var jump_released = Input.is_action_just_released("jump")
 	# the player can somewhat stop the jump but only close to the initial stremf
 	var is_far_from_apex = velocity.y < -move_data.jump_release_force 
-	if is_on_floor() and jump_input:
-		velocity.y = -move_data.jump_strength
-	
-	if not is_on_floor():
-		sprite.play("jump")
-		
-	if not is_on_floor() and jump_released and is_far_from_apex:
-		# variable jump height
-		velocity.y = 0
-	if not is_on_floor() and velocity.y > 0:
-		velocity.y += move_data.after_jump_apex__extra_gravity
-		
-	var was_in_air = not is_on_floor()
 
+	# regular jump
+	if is_on_floor():
+		double_jump = move_data.double_jumps
+		if jump_input:
+			jump()
+	else:
+		sprite.play("jump")
+		# double_jump
+		if jump_input and double_jump > 0:
+			jump()
+			double_jump -= 1
+
+		if jump_input:
+			buffered_jump = true
+			# jump_buffer_timer.start()
+			
+		if jump_released and is_far_from_apex:
+			# variable jump height
+			velocity.y = 0
+			
+		if velocity.y > 0:
+			velocity.y += move_data.after_jump_apex__extra_gravity
+			
+
+	var in_air_before_moving = not is_on_floor() # must come before move_and_slide
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	var just_landed = is_on_floor() and was_in_air
+	var just_landed = is_on_floor() and in_air_before_moving
 	if just_landed:
 		# basically we just want to force starting on the idle frame here
 		# so that we do not have a looooong jump / run pose on landing
@@ -97,3 +111,6 @@ func apply_acceleration(input_x: float, delta: float):
 
 func die():
 	var _a = get_tree().reload_current_scene()
+
+func jump():
+	velocity.y = -move_data.jump_strength
