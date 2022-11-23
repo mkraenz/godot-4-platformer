@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://World.gd" type="Script" id=4]
 [ext_resource path="res://Enemies/WalkingEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Ladder.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/Switch.tscn" type="PackedScene" id=7]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 4 )
@@ -54,14 +55,30 @@ position = Vector2( 152, 144 )
 [node name="WalkingEnemy2" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 148, 180 )
 
-[node name="Ladder" parent="." instance=ExtResource( 6 )]
+[node name="SwitchForLadder1" parent="." instance=ExtResource( 7 )]
+position = Vector2( 63, 36 )
+
+[node name="Ladder1" type="Node2D" parent="."]
+
+[node name="Ladder" parent="Ladder1" instance=ExtResource( 6 )]
 position = Vector2( 72, 128 )
 
-[node name="Ladder2" parent="." instance=ExtResource( 6 )]
+[node name="Ladder2" parent="Ladder1" instance=ExtResource( 6 )]
 position = Vector2( 72, 112 )
 
-[node name="Ladder3" parent="." instance=ExtResource( 6 )]
+[node name="Ladder3" parent="Ladder1" instance=ExtResource( 6 )]
 position = Vector2( 72, 96 )
 
-[node name="Ladder4" parent="." instance=ExtResource( 6 )]
+[node name="Ladder4" parent="Ladder1" instance=ExtResource( 6 )]
 position = Vector2( 72, 80 )
+
+[node name="Ladder5" parent="Ladder1" instance=ExtResource( 6 )]
+position = Vector2( 72, 64 )
+
+[node name="Ladder6" parent="Ladder1" instance=ExtResource( 6 )]
+position = Vector2( 72, 48 )
+
+[node name="Ladder7" parent="Ladder1" instance=ExtResource( 6 )]
+position = Vector2( 72, 32 )
+
+[connection signal="switch_on_ladder1" from="SwitchForLadder1" to="." method="_on_SwitchForLadder1_switch_on_ladder1"]
