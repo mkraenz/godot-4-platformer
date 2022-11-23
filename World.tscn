@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Traps/Spike.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World.gd" type="Script" id=4]
 [ext_resource path="res://Enemies/WalkingEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Ladder.tscn" type="PackedScene" id=6]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 4 )
@@ -15,6 +16,7 @@ tile_data = PoolIntArray( 65541, 1, 65537, 65542, 1, 65539, 65550, 0, 0, 65552, 
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 34, 128 )
+z_index = 1
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Cam")
@@ -47,7 +49,19 @@ position = Vector2( 9, 199 )
 [node name="Enemies" type="YSort" parent="."]
 
 [node name="WalkingEnemy" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 120, 144 )
+position = Vector2( 152, 144 )
 
 [node name="WalkingEnemy2" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 148, 180 )
+
+[node name="Ladder" parent="." instance=ExtResource( 6 )]
+position = Vector2( 72, 128 )
+
+[node name="Ladder2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 72, 112 )
+
+[node name="Ladder3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 72, 96 )
+
+[node name="Ladder4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 72, 80 )

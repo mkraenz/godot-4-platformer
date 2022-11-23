@@ -1,18 +1,48 @@
 class_name Player
 extends KinematicBody2D
 
-var velocity := Vector2.ZERO
-
 export (Resource) var move_data # : PlayerMovementData
 
 onready var sprite = $AnimatedSprite
+onready var ladders = $LadderCheck
+
+enum State {
+	Walk,
+	Climb,
+}
+
+var velocity := Vector2.ZERO
+var state = State.Walk
+
 
 func _physics_process(delta):
+	match state:
+		State.Walk:
+			move_state(delta)
+		State.Climb:
+			climb_state(delta)
+
+func climb_state(_delta: float):
+	var input_vec = Input.get_vector("move_left", "move_right", "jump", "move_down")
+	velocity = input_vec * move_data.climb_speed
+	var _a = move_and_slide(velocity, Vector2.UP)
+
+	if input_vec == Vector2.ZERO:
+		sprite.play("idle")
+	else:
+		sprite.play("run")
+
+	if not is_on_ladder():
+		state = State.Walk
+
+func move_state(delta: float):
+	if is_on_ladder() and Input.is_action_just_pressed("jump"):
+		state = State.Climb
+
 	if position.y > move_data.die_over_y:
 		die()
 
-	var input_x = Input.get_action_strength("move_right") - \
-		Input.get_action_strength("move_left")
+	var input_x = Input.get_axis("move_left", "move_right")
 	if input_x != 0:
 		sprite.play("run")
 		apply_acceleration(input_x, delta)
@@ -48,6 +78,10 @@ func _physics_process(delta):
 		# basically we just want to force starting on the idle frame here
 		# so that we do not have a looooong jump / run pose on landing
 		sprite.play("run", true)
+
+func is_on_ladder():
+	return ladders.is_colliding()
+
 
 func apply_gravity():
 	 velocity.y += move_data.gravity
