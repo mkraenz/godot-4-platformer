@@ -16,7 +16,6 @@ const die_over_y = 200
 onready var sprite = $AnimatedSprite
 
 func _physics_process(delta):
-	print(position.y)
 	if position.y > die_over_y:
 		die()
 

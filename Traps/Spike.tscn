@@ -15,6 +15,7 @@ region_enabled = true
 region_rect = Rect2( 144, 54, 18, 18 )
 
 [node name="Shape" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( -7, 0, -7, -3, -5, -7, -3, -7, -1, -3, 1, -3, 3, -7, 5, -7, 7, -3, 7, 0 )
 
 [connection signal="body_entered" from="." to="." method="_on_Spike_body_entered"]
