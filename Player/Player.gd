@@ -7,6 +7,8 @@ export (Resource) var move_data = preload("res://Player/DefaultPlayerMovementDat
 onready var sprite := $AnimatedSprite
 onready var ladders := $LadderCheck
 onready var jump_buffer_timer := $JumpBufferTimer
+onready var coyote_jump_timer := $CoyoteJumpTimer
+
 
 enum State {
 	Walk,
@@ -17,6 +19,7 @@ var velocity := Vector2.ZERO
 var state : int = State.Walk
 var double_jump := 1
 var buffered_jump := false
+var coyote_jump := false
 
 func _physics_process(delta):
 	match state:
@@ -62,7 +65,7 @@ func move_state(delta: float):
 	var is_far_from_apex = velocity.y < -move_data.jump_release_force 
 
 	# regular jump
-	if is_on_floor():
+	if is_on_floor() or coyote_jump:
 		double_jump = move_data.double_jumps
 		if jump_input or buffered_jump:
 			jump()
@@ -70,6 +73,7 @@ func move_state(delta: float):
 		sprite.play("jump")
 		# double_jump
 		if jump_input and double_jump > 0:
+			print('double')
 			jump()
 			double_jump -= 1
 		elif jump_input and double_jump == 0:
@@ -83,11 +87,19 @@ func move_state(delta: float):
 		if velocity.y > 0:
 			velocity.y += move_data.after_jump_apex__extra_gravity
 			
+	var on_floor_before_moving := is_on_floor() # must come before mve_and_slide
+	var in_air_before_moving := not is_on_floor() # must come before move_and_slide
 
-	var in_air_before_moving = not is_on_floor() # must come before move_and_slide
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
+	var just_left_ground := not is_on_floor() and on_floor_before_moving
 	var just_landed = is_on_floor() and in_air_before_moving
+
+	print(velocity.y)
+	if just_left_ground and velocity.y > 0:
+		print('coyote')
+		coyote_jump = true
+		coyote_jump_timer.start()
 	if just_landed:
 		# basically we just want to force starting on the idle frame here
 		# so that we do not have a looooong jump / run pose on landing
@@ -115,7 +127,12 @@ func die() -> void:
 func jump() -> void:
 	velocity.y = -move_data.jump_strength
 	buffered_jump = false
+	coyote_jump = false
 
+
+
+func _on_CoyoteJumpTimer_timeout() -> void:
+	coyote_jump = false
 
 func _on_JumpBufferTimer_timeout() -> void:
 	buffered_jump = false
