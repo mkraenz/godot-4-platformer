@@ -51,8 +51,9 @@ curve = SubResource( 6 )
 script = ExtResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2( 208, 0 )
+position = Vector2( 109.966, 64 )
 rotation = -0.0399791
+offset = 208.044
 rotate = false
 
 [node name="Enemy" type="Node2D" parent="PathFollow2D"]
