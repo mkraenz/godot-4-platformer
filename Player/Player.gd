@@ -69,7 +69,7 @@ func move_state(delta: float):
 		sprite.play("idle")
 		apply_friction(delta)
 		
-	apply_gravity()
+	apply_gravity(delta)
 	
 	var jump_released = Input.is_action_just_released("jump")
 	# the player can somewhat stop the jump but only close to the initial stremf
@@ -124,9 +124,10 @@ func is_on_ladder() -> bool:
 func is_below_level() -> bool:
 	return position.y > move_data.die_over_y
 
-func apply_gravity() -> void:
-	 velocity.y += move_data.gravity
-	 velocity.y = min(velocity.y, move_data.max_fall_speed)
+func apply_gravity(delta: float) -> void:
+	print(delta)
+	velocity.y += move_data.gravity * delta
+	velocity.y = min(velocity.y, move_data.max_fall_speed)
 
 func apply_friction(delta: float) -> void:
 	velocity.x = velocity.move_toward(Vector2.ZERO, \
