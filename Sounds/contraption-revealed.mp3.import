@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/contraption-revealed.mp3-88d8494107884a552ef21bf2034a43e4.mp3str"
+
+[deps]
+
+source_file="res://Sounds/contraption-revealed.mp3"
+dest_files=[ "res://.import/contraption-revealed.mp3-88d8494107884a552ef21bf2034a43e4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
