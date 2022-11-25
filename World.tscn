@@ -27,10 +27,6 @@ tile_data = PoolIntArray( 65541, 1, 65537, 65542, 1, 65539, 65550, 0, 0, 65552, 
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 176, 25 )
-z_index = 1
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Cam")
 
 [node name="Cam" type="Camera2D" parent="."]
 position = Vector2( 176, 25 )
@@ -110,5 +106,6 @@ position = Vector2( 72, 32 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
+bus = "Sound"
 
 [connection signal="switch_on_ladder1" from="SwitchForLadder1" to="." method="_on_SwitchForLadder1_switch_on_ladder1"]

@@ -19,7 +19,7 @@ loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("PathFollow2D:unit_offset")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
@@ -51,9 +51,9 @@ curve = SubResource( 6 )
 script = ExtResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2( 109.966, 64 )
+position = Vector2( 119.089, 0 )
 rotation = -0.0399791
-offset = 208.044
+offset = 119.111
 rotate = false
 
 [node name="Enemy" type="Node2D" parent="PathFollow2D"]

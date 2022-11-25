@@ -77,10 +77,13 @@ wait_time = 0.13
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "Sound"
 
 [node name="AudioAnims" type="AnimationPlayer" parent="."]
 anims/jump = SubResource( 4 )
 anims/land = SubResource( 5 )
+
+[node name="RemoteCam" type="RemoteTransform2D" parent="."]
 
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_JumpBufferTimer_timeout"]
 [connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_CoyoteJumpTimer_timeout"]

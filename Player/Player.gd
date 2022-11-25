@@ -1,6 +1,8 @@
 class_name Player
 extends KinematicBody2D
 
+signal player_died
+
 # hacky way to force autocompletion
 export (Resource) var move_data = preload("res://Player/DefaultPlayerMovementData.tres") as PlayerMovementData
 
@@ -10,6 +12,7 @@ onready var jump_buffer_timer := $JumpBufferTimer
 onready var coyote_jump_timer := $CoyoteJumpTimer
 onready var audio := $AudioAnims
 onready var stats := PlayerStats
+onready var remote_cam = $RemoteCam
 
 
 enum State {
@@ -25,6 +28,7 @@ var coyote_jump := false
 
 func _ready() -> void:
 	var _a = stats.connect("no_health", self, "die")
+	z_index = 100 # render before objects
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -136,7 +140,8 @@ func apply_acceleration(input_x: float, delta: float) -> void:
 
 func die() -> void:
 	stats.reset_singleton()
-	var _a = get_tree().reload_current_scene()
+	emit_signal("player_died")
+	queue_free()
 
 func jump() -> void:
 	audio.play("jump")
@@ -155,3 +160,7 @@ func _on_JumpBufferTimer_timeout() -> void:
 
 func take_damage(amount: int) -> void:
 	stats.health = stats.health - amount
+
+func connect_camera(camera: Camera2D) -> void:
+	var path = camera.get_path()
+	remote_cam.remote_path = path
