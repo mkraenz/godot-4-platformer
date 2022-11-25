@@ -11,3 +11,4 @@ func _on_Checkpoint_body_entered(_body: Player) -> void:
 	shape.set_deferred("disabled", true)
 	animsprite.play("active")
 	gevents.emit_hit_checkpoint(global_position)
+	# TODO add sound

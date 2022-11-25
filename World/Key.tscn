@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tiles_packed.png" type="Texture" id=1]
+[ext_resource path="res://World/Key.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9, 6 )
+
+[node name="Key" type="Area2D"]
+position = Vector2( 0, -6 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 126, 18, 18, 18 )
+
+[connection signal="body_entered" from="." to="." method="_on_Key_body_entered"]
