@@ -98,7 +98,7 @@ func move_state(delta: float):
 			
 		# fast fall
 		if velocity.y > 0:
-			velocity.y += move_data.after_jump_apex__extra_gravity
+			velocity.y += move_data.after_jump_apex__extra_gravity * delta
 			
 	var on_floor_before_moving := is_on_floor() # must come before mve_and_slide
 	var in_air_before_moving := not is_on_floor() # must come before move_and_slide
@@ -125,7 +125,6 @@ func is_below_level() -> bool:
 	return position.y > move_data.die_over_y
 
 func apply_gravity(delta: float) -> void:
-	print(delta)
 	velocity.y += move_data.gravity * delta
 	velocity.y = min(velocity.y, move_data.max_fall_speed)
 
