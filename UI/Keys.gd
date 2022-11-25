@@ -3,7 +3,6 @@ extends HBoxContainer
 const KeyIcon = preload("res://UI/KeyIcon.tscn")
 
 func set_keys(amount: int):
-	print(amount)
 	var child_count = get_children().size()
 	if child_count == amount:
 		return

@@ -1,13 +1,6 @@
-extends StaticBody2D
+extends Area2D
 
-onready var player_stats = PlayerStats
+export (String, FILE, "*.tscn") var target_level_path = ""
 
-func open_door():
-	player_stats.keys -= 1
-	queue_free()
-	# TODO play sound
-
-func _on_ActionArea_body_entered(_body: Player) -> void:
-	var can_open = player_stats.keys > 0
-	if can_open:
-		open_door()
+func _on_Door_body_entered(_body: Player) -> void:
+	var _a = get_tree().change_scene(target_level_path)

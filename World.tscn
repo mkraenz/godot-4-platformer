@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -15,7 +15,8 @@
 [ext_resource path="res://World/Checkpoint.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Enemies/Stomper/Stomper.tscn" type="PackedScene" id=14]
 [ext_resource path="res://World/Key.tscn" type="PackedScene" id=15]
-[ext_resource path="res://World/Door.tscn" type="PackedScene" id=16]
+[ext_resource path="res://World/Lock.tscn" type="PackedScene" id=16]
+[ext_resource path="res://World/Door.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -127,7 +128,10 @@ position = Vector2( 204, 29 )
 [node name="Key3" parent="." instance=ExtResource( 15 )]
 position = Vector2( 242, 79 )
 
-[node name="Door" parent="." instance=ExtResource( 16 )]
+[node name="Lock" parent="." instance=ExtResource( 16 )]
 position = Vector2( 306, 92 )
+
+[node name="Door" parent="." instance=ExtResource( 17 )]
+position = Vector2( 351, 91 )
 
 [connection signal="switch_on_ladder1" from="SwitchForLadder1" to="." method="_on_SwitchForLadder1_switch_on_ladder1"]
