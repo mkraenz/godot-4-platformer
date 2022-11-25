@@ -39,6 +39,7 @@ config/icon="res://icon.png"
 [autoload]
 
 PlayerStats="*res://Player/PlayerStats.tscn"
+GEvents="*res://gEvents.gd"
 
 [display]
 

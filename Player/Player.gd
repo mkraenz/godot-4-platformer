@@ -1,8 +1,6 @@
 class_name Player
 extends KinematicBody2D
 
-signal player_died
-
 # hacky way to force autocompletion
 export (Resource) var move_data = preload("res://Player/DefaultPlayerMovementData.tres") as PlayerMovementData
 
@@ -12,8 +10,8 @@ onready var jump_buffer_timer := $JumpBufferTimer
 onready var coyote_jump_timer := $CoyoteJumpTimer
 onready var audio := $AudioAnims
 onready var stats := PlayerStats
-onready var remote_cam = $RemoteCam
-
+onready var remote_cam := $RemoteCam
+onready var gevents := GEvents
 
 enum State {
 	Walk,
@@ -140,7 +138,7 @@ func apply_acceleration(input_x: float, delta: float) -> void:
 
 func die() -> void:
 	stats.reset_singleton()
-	emit_signal("player_died")
+	gevents.emit_player_died()
 	queue_free()
 
 func jump() -> void:
