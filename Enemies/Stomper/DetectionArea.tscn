@@ -14,3 +14,6 @@ height = 50.0
 [node name="DetectionShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 50 )
 shape = SubResource( 5 )
+
+[connection signal="body_entered" from="." to="." method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_DetectionArea_body_exited"]

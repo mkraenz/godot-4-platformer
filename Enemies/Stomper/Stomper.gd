@@ -10,6 +10,7 @@ enum State {
 onready var animsprite := $AnimatedSprite
 onready var start_position := global_position
 onready var land_timer := $LandTimer
+onready var detector := $DetectionArea
 
 export var fall_direction := Vector2.DOWN 
 
@@ -19,7 +20,8 @@ var velocity := Vector2.ZERO
 const max_speed := 100
 const max_rise_speed := 30
 const land_wait_time := 1.0 # in secs
-const rise_tolerance = 0.002
+const rise_tolerance := 0.002
+const acceleration := 400.0
 
 func _ready() -> void:
 	pass
@@ -28,8 +30,13 @@ func _physics_process(delta: float) -> void:
 	match state:
 		State.Hover:
 			animsprite.play("rising")
+			if detector.player:
+				state = State.Fall
 		State.Fall:
 			animsprite.play("falling")
+			# TODO add acceleration to make this fair
+			velocity = velocity.move_toward(fall_direction * max_speed, acceleration * delta)
+
 			velocity = move_and_slide(velocity, fall_direction * -1)
 			if is_on_floor():
 				state = State.Land
@@ -45,10 +52,3 @@ func _physics_process(delta: float) -> void:
 
 func _on_LandTimer_timeout():
 	state = State.Rise
-
-
-func _on_DetectionArea_body_entered(_body: Player) -> void:
-	if state != State.Hover:
-		return
-	velocity = fall_direction * max_speed
-	state = State.Fall

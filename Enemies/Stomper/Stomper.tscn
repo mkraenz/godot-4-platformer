@@ -60,5 +60,4 @@ shape = SubResource( 1 )
 [node name="LandTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
 [connection signal="timeout" from="LandTimer" to="." method="_on_LandTimer_timeout"]
