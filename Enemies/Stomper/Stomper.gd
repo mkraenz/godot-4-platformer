@@ -33,7 +33,6 @@ func _physics_process(delta: float) -> void:
 				state = State.Fall
 		State.Fall:
 			animsprite.play("falling")
-			# TODO add acceleration to make this fair
 			velocity = velocity.move_toward(fall_direction * max_speed, acceleration * delta)
 
 			velocity = move_and_slide(velocity, fall_direction * -1)
