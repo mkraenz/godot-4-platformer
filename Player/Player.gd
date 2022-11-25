@@ -8,7 +8,7 @@ onready var sprite := $AnimatedSprite
 onready var ladders := $LadderCheck
 onready var jump_buffer_timer := $JumpBufferTimer
 onready var coyote_jump_timer := $CoyoteJumpTimer
-onready var audio := $AudioStreamPlayer
+onready var audio := $AudioAnims
 onready var stats := PlayerStats
 
 
@@ -111,6 +111,7 @@ func move_state(delta: float):
 		coyote_jump_timer.start()
 
 	if just_landed:
+		audio.play("land")
 		# basically we just want to force starting on the idle frame here
 		# so that we do not have a looooong jump / run pose on landing
 		sprite.play("run", true)
@@ -138,7 +139,7 @@ func die() -> void:
 	var _a = get_tree().reload_current_scene()
 
 func jump() -> void:
-	audio.play()
+	audio.play("jump")
 	velocity.y = -move_data.jump_strength
 	buffered_jump = false
 	coyote_jump = false

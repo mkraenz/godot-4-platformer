@@ -1,12 +1,49 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/PlayerGreenSkin.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Player/FastPlayerMovementData.tres" type="Resource" id=3]
 [ext_resource path="res://Sounds/jump.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/land.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 5, 9 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "jump"
+length = 0.11
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "land"
+length = 0.01
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -40,6 +77,10 @@ wait_time = 0.13
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="AudioAnims" type="AnimationPlayer" parent="."]
+anims/jump = SubResource( 4 )
+anims/land = SubResource( 5 )
 
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_JumpBufferTimer_timeout"]
 [connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_CoyoteJumpTimer_timeout"]
