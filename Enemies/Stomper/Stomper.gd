@@ -11,6 +11,8 @@ onready var animsprite := $AnimatedSprite
 onready var start_position := global_position
 onready var land_timer := $LandTimer
 onready var detector := $DetectionArea
+onready var dust_effect := $DustEffect
+onready var audio := $Audio
 
 export var fall_direction := Vector2.DOWN 
 
@@ -22,9 +24,6 @@ const max_rise_speed := 30
 const land_wait_time := 1.0 # in secs
 const rise_tolerance := 0.002
 const acceleration := 400.0
-
-func _ready() -> void:
-	pass
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -41,7 +40,9 @@ func _physics_process(delta: float) -> void:
 			if is_on_floor():
 				state = State.Land
 		State.Land:
+			dust_effect.emitting = true
 			if land_timer.is_stopped():
+				audio.play() # only play audio once
 				land_timer.start(land_wait_time)
 			animsprite.play("falling")
 		State.Rise:
