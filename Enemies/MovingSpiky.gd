@@ -32,8 +32,9 @@ func animate():
 	var playback_speed_factor = -1 if reverse_direction else 1
 	# to play anim backwards, we need
 	var speed = playback_speed * playback_speed_factor
-	match animation_type:
-		AnimationType.Loop:
-			anims.play("move_along_path_loop", -1, speed, reverse_direction)
-		AnimationType.Bounce:
-			anims.play("move_along_path_bounce", -1, speed, reverse_direction)
+	if anims: # because this is a tool, godot sometimes this becomes null on bootup
+		match animation_type:
+			AnimationType.Loop:
+				anims.play("move_along_path_loop", -1, speed, reverse_direction)
+			AnimationType.Bounce:
+				anims.play("move_along_path_bounce", -1, speed, reverse_direction)

@@ -8,6 +8,7 @@ onready var sprite := $AnimatedSprite
 onready var ladders := $LadderCheck
 onready var jump_buffer_timer := $JumpBufferTimer
 onready var coyote_jump_timer := $CoyoteJumpTimer
+onready var stats = PlayerStats
 
 
 enum State {
@@ -144,3 +145,6 @@ func _on_CoyoteJumpTimer_timeout() -> void:
 
 func _on_JumpBufferTimer_timeout() -> void:
 	buffered_jump = false
+
+func take_damage(amount: int):
+	stats.health = stats.health - amount
