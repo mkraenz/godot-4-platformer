@@ -8,7 +8,8 @@ onready var sprite := $AnimatedSprite
 onready var ladders := $LadderCheck
 onready var jump_buffer_timer := $JumpBufferTimer
 onready var coyote_jump_timer := $CoyoteJumpTimer
-onready var stats = PlayerStats
+onready var audio := $AudioStreamPlayer
+onready var stats := PlayerStats
 
 
 enum State {
@@ -22,7 +23,10 @@ var double_jump := 1
 var buffered_jump := false
 var coyote_jump := false
 
-func _physics_process(delta):
+func _ready() -> void:
+	var _a = stats.connect("no_health", self, "die")
+
+func _physics_process(delta: float) -> void:
 	match state:
 		State.Walk:
 			move_state(delta)
@@ -130,9 +134,11 @@ func apply_acceleration(input_x: float, delta: float) -> void:
 			move_data.acceleration * delta)
 
 func die() -> void:
+	stats.reset_singleton()
 	var _a = get_tree().reload_current_scene()
 
 func jump() -> void:
+	audio.play()
 	velocity.y = -move_data.jump_strength
 	buffered_jump = false
 	coyote_jump = false
@@ -146,5 +152,5 @@ func _on_CoyoteJumpTimer_timeout() -> void:
 func _on_JumpBufferTimer_timeout() -> void:
 	buffered_jump = false
 
-func take_damage(amount: int):
+func take_damage(amount: int) -> void:
 	stats.health = stats.health - amount

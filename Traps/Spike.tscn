@@ -12,6 +12,7 @@ region_enabled = true
 region_rect = Rect2( 144, 54, 18, 18 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 2 )]
+damage = 2
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hitbox"]
 visible = false
