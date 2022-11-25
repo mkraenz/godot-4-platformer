@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Common/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters_packed.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Stomper/Stomper.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/Stomper/DetectionArea.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 120, 24, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 24, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": false,
+"name": "falling",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": false,
+"name": "rising",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 9, 9 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 7 )
+
+[node name="Stomper" type="KinematicBody2D"]
+position = Vector2( 0, -9 )
+collision_layer = 0
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+animation = "rising"
+playing = true
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 5 )
+
+[node name="DetectionArea" parent="." instance=ExtResource( 4 )]
+width = 6.0
+height = 30.0
+
+[node name="Hitbox" parent="." instance=ExtResource( 1 )]
+visible = false
+collision_mask = 2
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 1 )
+
+[node name="LandTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="timeout" from="LandTimer" to="." method="_on_LandTimer_timeout"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/Stomper/DetectionArea.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 6, 30 )
+
+[node name="DetectionArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 1 )
+height = 50.0
+
+[node name="DetectionShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 50 )
+shape = SubResource( 5 )
