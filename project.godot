@@ -32,8 +32,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Godot-4-pixel-platformer-tutorial"
-run/main_scene="res://Levels/Level1/Level1.tscn"
+config/name="Jumping Alain"
+run/main_scene="res://UI/TitleMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
