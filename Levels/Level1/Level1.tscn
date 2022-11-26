@@ -20,10 +20,6 @@ position = Vector2( 67, 81 )
 [node name="TileMap" parent="." index="3" instance=ExtResource( 5 )]
 tile_data = PoolIntArray( 65550, 1, 65537, 65551, 1, 65538, 65552, 1, 65538, 65553, 1, 65538, 65554, 1, 65539, 65559, 1, 65537, 65560, 1, 65538, 65561, 1, 65539, 65566, 1, 65537, 65567, 1, 65538, 65568, 1, 65539, 65572, 0, 0, 65576, 0, 0, 65580, 0, 0, 65589, 0, 0, 65592, 1, 65537, 65593, 1, 65538, 65594, 1, 65539, 131086, 1, 458753, 131087, 1, 458754, 131088, 1, 458754, 131089, 1, 458754, 131090, 1, 458755, 131095, 1, 458753, 131096, 1, 458754, 131097, 1, 458755, 131102, 1, 458753, 131103, 1, 458754, 131104, 1, 458755, 131128, 1, 393217, 131129, 1, 393218, 131130, 1, 393219, 196616, 1, 65537, 196617, 1, 65538, 196618, 1, 65538, 196619, 1, 65538, 196620, 1, 65539, 196664, 1, 458753, 196665, 1, 458754, 196666, 1, 458755, 262152, 1, 458753, 262153, 1, 458754, 262154, 1, 458754, 262155, 1, 458754, 262156, 1, 458755, 262190, 0, 0, 262192, 0, 0, 327682, 1, 65537, 327683, 1, 65538, 327684, 1, 65538, 327685, 1, 65538, 327686, 1, 65539, 393218, 1, 458753, 393219, 1, 458754, 393220, 1, 458754, 393221, 1, 458754, 393222, 1, 458755 )
 
-[node name="Door" parent="TileMap" index="0" instance=ExtResource( 3 )]
-position = Vector2( 1051, 20 )
-target_level_path = "res://Levels/PlayGround.tscn"
-
 [node name="WalkingEnemy" parent="Enemies" index="0" instance=ExtResource( 2 )]
 position = Vector2( 278, 20 )
 
@@ -40,3 +36,11 @@ position = Vector2( 5, 0 )
 
 [node name="Checkpoint" parent="Interactables" index="0" instance=ExtResource( 1 )]
 position = Vector2( 569, 11 )
+
+[node name="Door" parent="Interactables" index="1" instance=ExtResource( 3 )]
+position = Vector2( 1046, 20 )
+target_level_path = "res://Levels/PlayGround.tscn"
+
+[node name="Door2" parent="Interactables" index="2" instance=ExtResource( 3 )]
+position = Vector2( 99, 91 )
+target_level_path = "res://Levels/PlayGround.tscn"
