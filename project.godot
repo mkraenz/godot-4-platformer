@@ -41,6 +41,7 @@ config/icon="res://icon.png"
 PlayerStats="*res://Player/PlayerStats.tscn"
 GEvents="*res://gEvents.gd"
 Transitions="*res://UI/Transitions.tscn"
+Music="*res://Sounds/Music.tscn"
 
 [display]
 

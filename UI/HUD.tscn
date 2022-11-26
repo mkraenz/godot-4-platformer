@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Sounds/hitHurt.mp3" type="AudioStream" id=2]
@@ -6,6 +6,24 @@
 [ext_resource path="res://UI/heart-full.png" type="Texture" id=4]
 [ext_resource path="res://UI/HeartsUI.gd" type="Script" id=5]
 [ext_resource path="res://UI/Keys.gd" type="Script" id=6]
+[ext_resource path="res://Sounds/lose.wav" type="AudioStream" id=7]
+
+[sub_resource type="Animation" id=2]
+resource_name = "die"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("Audio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "hurt_sfx"
@@ -35,6 +53,7 @@ stream = ExtResource( 2 )
 bus = "Sound"
 
 [node name="Anims" type="AnimationPlayer" parent="."]
+anims/die = SubResource( 2 )
 anims/hurt_sfx = SubResource( 1 )
 
 [node name="EmptyHearts" type="TextureRect" parent="."]

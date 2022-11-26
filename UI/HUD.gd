@@ -30,7 +30,7 @@ func update_hearts():
 	full_hearts.set_hearts(player_stats.health)
 
 func _on_no_health():
-	pass # TODO
+	anims.play("die")
 
 func _on_keys_changed(_data: Dictionary):
 	update_keys()

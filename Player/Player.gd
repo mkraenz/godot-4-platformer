@@ -25,6 +25,7 @@ var buffered_jump := false
 var coyote_jump := false
 
 func _ready() -> void:
+	stats.reset_singleton()
 	var _a = stats.connect("no_health", self, "die")
 	z_index = 100 # render before objects
 
@@ -137,7 +138,6 @@ func apply_acceleration(input_x: float, delta: float) -> void:
 			move_data.acceleration * delta)
 
 func die() -> void:
-	stats.reset_singleton()
 	gevents.emit_player_died()
 	queue_free()
 

@@ -18,7 +18,7 @@ func _ready():
 	connect_player(player)
 
 func _on_player_died() -> void:
-	yield(get_tree().create_timer(0.02), 'timeout')
+	yield(get_tree().create_timer(0.8), 'timeout')
 	var new_player = Player.instance()
 	add_child(new_player)
 	connect_player(new_player)
