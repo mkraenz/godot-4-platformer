@@ -40,7 +40,3 @@ position = Vector2( 569, 11 )
 [node name="Door" parent="Interactables" index="1" instance=ExtResource( 3 )]
 position = Vector2( 1046, 20 )
 target_level_path = "res://Levels/PlayGround.tscn"
-
-[node name="Door2" parent="Interactables" index="2" instance=ExtResource( 3 )]
-position = Vector2( 99, 91 )
-target_level_path = "res://Levels/PlayGround.tscn"
