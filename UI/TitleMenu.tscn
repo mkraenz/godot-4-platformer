@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/MyTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/TitleMenu.gd" type="Script" id=2]
 [ext_resource path="res://Levels/Level1/Level1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/MenuBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/Title.tscn" type="PackedScene" id=5]
 
 [node name="TitleMenu" type="Control"]
 anchor_right = 1.0
@@ -11,22 +13,9 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 level = ExtResource( 3 )
 
-[node name="Background" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.53, 0.81, 0.92, 1 )
+[node name="Background" parent="." instance=ExtResource( 4 )]
 
-[node name="Title" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -104.0
-margin_top = 24.0
-margin_right = 104.0
-margin_bottom = 40.0
-theme = ExtResource( 1 )
-text = "Jumping Alain"
-align = 1
-valign = 1
+[node name="Title" parent="." instance=ExtResource( 5 )]
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 anchor_left = 0.5

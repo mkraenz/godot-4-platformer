@@ -1,5 +1,63 @@
-[gd_scene format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/MyTheme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/Title.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/MenuBackground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/PauseMenu.gd" type="Script" id=4]
+[ext_resource path="res://UI/PausedLabel.gd" type="Script" id=5]
 
 [node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Background" parent="." instance=ExtResource( 3 )]
+
+[node name="Title" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 56.0
+margin_right = 264.0
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+margin_left = 90.0
+margin_top = 100.0
+margin_right = 230.0
+margin_bottom = 148.0
+
+[node name="ContinueButton" type="Button" parent="Buttons"]
+margin_right = 140.0
+margin_bottom = 22.0
+text = "Continue"
+
+[node name="QuitButton" type="Button" parent="Buttons"]
+margin_top = 26.0
+margin_right = 140.0
+margin_bottom = 48.0
+text = "Quit"
+
+[node name="PausedLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -72.0
+margin_top = -21.0
+margin_right = 72.0
+margin_bottom = -5.0
+text = "Paused..."
+align = 1
+script = ExtResource( 5 )
+
+[node name="VisibilityTimer" type="Timer" parent="PausedLabel"]
+autostart = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[connection signal="pressed" from="Buttons/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="timeout" from="PausedLabel/VisibilityTimer" to="PausedLabel" method="_on_VisibilityTimer_timeout"]
