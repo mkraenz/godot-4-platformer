@@ -13,7 +13,7 @@ func _ready():
 	var _d = player_stats.connect("keys_changed", self, "_on_keys_changed")
 
 	update_hearts()
-
+	update_keys()
 
 func _on_max_health_changed(data: Dictionary):
 	var _diff = data["diff"]
@@ -33,4 +33,7 @@ func _on_no_health():
 	pass # TODO
 
 func _on_keys_changed(_data: Dictionary):
+	update_keys()
+
+func update_keys():
 	keys.set_keys(player_stats.keys)
