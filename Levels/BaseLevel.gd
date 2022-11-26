@@ -5,6 +5,7 @@ const Player = preload("res://Player/Player.tscn")
 onready var player = $Player
 onready var cam = $Cam
 onready var gevents = GEvents
+onready var player_stats = PlayerStats
 
 var player_spawnpoint = Vector2.ZERO
 
@@ -13,6 +14,7 @@ func _ready():
 
 	gevents.connect("hit_checkpoint", self, "_on_hit_checkpoint")
 	gevents.connect("player_died", self, "_on_player_died")
+	gevents.connect("player_fell_down", self, "_on_player_fell_down")
 
 	player_spawnpoint = player.global_position
 	connect_player(player)
@@ -22,6 +24,14 @@ func _on_player_died() -> void:
 	var new_player = Player.instance()
 	add_child(new_player)
 	connect_player(new_player)
+	player_stats.reset_singleton()
+	
+func _on_player_fell_down() -> void:
+	yield(get_tree().create_timer(0.8), 'timeout')
+	var new_player = Player.instance()
+	add_child(new_player)
+	connect_player(new_player)
+
 
 func connect_player(player_: Player) -> void:
 	player_.connect_camera(cam)

@@ -9,7 +9,7 @@ extents = Vector2( 7, 7 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 14.0
 
-[node name="Door" type="StaticBody2D"]
+[node name="Lock" type="StaticBody2D"]
 collision_mask = 0
 script = ExtResource( 2 )
 

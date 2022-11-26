@@ -12,7 +12,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, -2, 0, 0, 0, 0, 71, -2, 0, 0, 0, 0, 71, 47, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, -2 )
 }
 
-[node name="BaseLevel" instance=ExtResource( 4 )]
+[node name="Level1" instance=ExtResource( 4 )]
 
 [node name="Player" parent="." index="0"]
 position = Vector2( 69, 93 )
@@ -39,4 +39,4 @@ position = Vector2( 569, 11 )
 
 [node name="Door" parent="Interactables" index="1" instance=ExtResource( 3 )]
 position = Vector2( 1046, 20 )
-target_level_path = "res://Levels/PlayGround.tscn"
+target_level_path = "res://Levels/Level2/Level2.tscn"

@@ -12,6 +12,5 @@ after_jump_apex__extra_gravity = 125
 jump_strength = 170
 jump_release_force = 40
 max_fall_speed = 200.0
-die_over_y = 200
 climb_speed = 50.0
 double_jumps = 1

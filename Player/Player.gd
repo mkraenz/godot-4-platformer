@@ -13,6 +13,8 @@ onready var stats := PlayerStats
 onready var remote_cam := $RemoteCam
 onready var gevents := GEvents
 
+const die_over_y = 300
+
 enum State {
 	Walk,
 	Climb,
@@ -25,7 +27,6 @@ var buffered_jump := false
 var coyote_jump := false
 
 func _ready() -> void:
-	stats.reset_singleton()
 	var _a = stats.connect("no_health", self, "die")
 	z_index = 100 # render before objects
 
@@ -58,7 +59,7 @@ func move_state(delta: float):
 		state = State.Climb
 
 	if is_below_level():
-		die()
+		fell_below_level()
 
 	var input_x = Input.get_axis("move_left", "move_right")
 	var has_horizontal_input = input_x != 0
@@ -123,7 +124,7 @@ func is_on_ladder() -> bool:
 	return ladders.is_colliding()
 
 func is_below_level() -> bool:
-	return position.y > move_data.die_over_y
+	return position.y > die_over_y
 
 func apply_gravity(delta: float) -> void:
 	velocity.y += move_data.gravity * delta
@@ -139,6 +140,11 @@ func apply_acceleration(input_x: float, delta: float) -> void:
 
 func die() -> void:
 	gevents.emit_player_died()
+	queue_free()
+
+func fell_below_level() -> void:
+	take_damage(1) # first take damage, then emit fell down event so that audio plays the falling sound
+	gevents.emit_player_fell_down()
 	queue_free()
 
 func jump() -> void:

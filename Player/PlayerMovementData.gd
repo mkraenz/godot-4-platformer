@@ -9,6 +9,5 @@ export var after_jump_apex__extra_gravity := 125
 export var jump_strength = 140
 export var jump_release_force = 40
 export var max_fall_speed = 200.0
-export var die_over_y = 200
 export var climb_speed := 50.0
 export var double_jumps := 1
