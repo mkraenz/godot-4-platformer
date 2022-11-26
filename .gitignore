@@ -18,3 +18,5 @@ export_presets.cfg
 .mono/
 data_*/
 Footer
+
+.build/
