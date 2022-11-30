@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Backgrounds/Sky/sky-1.png" type="Texture" id=1]
+[ext_resource path="res://Backgrounds/Sky/sky-3.png" type="Texture" id=2]
+[ext_resource path="res://Backgrounds/Sky/sky-4.png" type="Texture" id=3]
+[ext_resource path="res://Backgrounds/Sky/sky-2.png" type="Texture" id=4]
+
+[node name="Sky" type="ParallaxBackground"]
+scroll_limit_end = Vector2( 0, 180 )
+
+[node name="Base" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_offset = Vector2( 0, -90 )
+motion_mirroring = Vector2( 320, 180 )
+
+[node name="Sprite" type="Sprite" parent="Base"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="BackCloud" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.2, 0.5 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Sprite" type="Sprite" parent="BackCloud"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="CenterCloud" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.26, 0.5 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Sprite" type="Sprite" parent="CenterCloud"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="FrontCloud" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.27, 0.5 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Sprite" type="Sprite" parent="FrontCloud"]
+texture = ExtResource( 3 )
+centered = false
