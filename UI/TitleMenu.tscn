@@ -1,23 +1,33 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI/MyTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/TitleMenu.gd" type="Script" id=2]
 [ext_resource path="res://Levels/Level1/Level1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://UI/MenuBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Backgrounds/Sky/Sky.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/Title.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/ParallaxCam.gd" type="Script" id=7]
 
-[node name="TitleMenu" type="Control"]
+[node name="TitleMenu" type="Node2D"]
+
+[node name="ParallaxCam" type="Camera2D" parent="."]
+position = Vector2( 160, 90 )
+current = true
+script = ExtResource( 7 )
+
+[node name="Sky" parent="." instance=ExtResource( 4 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TitleMenuUI" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 level = ExtResource( 3 )
 
-[node name="Background" parent="." instance=ExtResource( 4 )]
+[node name="Title" parent="CanvasLayer/TitleMenuUI" instance=ExtResource( 5 )]
 
-[node name="Title" parent="." instance=ExtResource( 5 )]
-
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/TitleMenuUI"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -27,16 +37,16 @@ margin_top = 12.0
 margin_right = 46.0
 margin_bottom = 60.0
 
-[node name="StartButton" type="Button" parent="Buttons"]
+[node name="StartButton" type="Button" parent="CanvasLayer/TitleMenuUI/Buttons"]
 margin_right = 92.0
 margin_bottom = 22.0
 text = "Start"
 
-[node name="QuitButton" type="Button" parent="Buttons"]
+[node name="QuitButton" type="Button" parent="CanvasLayer/TitleMenuUI/Buttons"]
 margin_top = 26.0
 margin_right = 92.0
 margin_bottom = 48.0
 text = "Quit"
 
-[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_StartButton_pressed"]
-[connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TitleMenuUI/Buttons/StartButton" to="CanvasLayer/TitleMenuUI" method="_on_StartButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TitleMenuUI/Buttons/QuitButton" to="CanvasLayer/TitleMenuUI" method="_on_QuitButton_pressed"]
