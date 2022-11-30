@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://World/Checkpoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/WalkingEnemy.tscn" type="PackedScene" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Levels/BaseLevel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemies/MovingSpiky.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Backgrounds/Sky/sky-1.png" type="Texture" id=7]
+[ext_resource path="res://Backgrounds/Sky/sky-3.png" type="Texture" id=8]
+[ext_resource path="res://Backgrounds/Sky/sky-4.png" type="Texture" id=9]
+[ext_resource path="res://Backgrounds/Sky/sky-2.png" type="Texture" id=10]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -19,6 +23,9 @@ position = Vector2( 69, 93 )
 
 [node name="Cam" parent="." index="1"]
 position = Vector2( 69, 86 )
+
+[node name="PauseMenu" parent="GUI" index="1"]
+visible = false
 
 [node name="TileMap" parent="." index="3" instance=ExtResource( 5 )]
 tile_data = PoolIntArray( 65550, 1, 65537, 65551, 1, 65538, 65552, 1, 65538, 65553, 1, 65538, 65554, 1, 65539, 65559, 1, 65537, 65560, 1, 65538, 65561, 1, 65539, 65566, 1, 65537, 65567, 1, 65538, 65568, 1, 65539, 65572, 0, 0, 65576, 0, 0, 65580, 0, 0, 65589, 0, 0, 65592, 1, 65537, 65593, 1, 65538, 65594, 1, 65539, 131086, 1, 458753, 131087, 1, 458754, 131088, 1, 458754, 131089, 1, 458754, 131090, 1, 458755, 131095, 1, 458753, 131096, 1, 458754, 131097, 1, 458755, 131102, 1, 458753, 131103, 1, 458754, 131104, 1, 458755, 131128, 1, 393217, 131129, 1, 393218, 131130, 1, 393219, 196616, 1, 65537, 196617, 1, 65538, 196618, 1, 65538, 196619, 1, 65538, 196620, 1, 65539, 196664, 1, 458753, 196665, 1, 458754, 196666, 1, 458755, 262152, 1, 458753, 262153, 1, 458754, 262154, 1, 458754, 262155, 1, 458754, 262156, 1, 458755, 262190, 0, 0, 262192, 0, 0, 327682, 1, 65537, 327683, 1, 65538, 327684, 1, 65538, 327685, 1, 65538, 327686, 1, 65539, 393218, 1, 458753, 393219, 1, 458754, 393220, 1, 458754, 393221, 1, 458754, 393222, 1, 458755 )
@@ -43,3 +50,39 @@ position = Vector2( 569, 11 )
 [node name="Door" parent="Interactables" index="1" instance=ExtResource( 3 )]
 position = Vector2( 1046, 20 )
 target_level_path = "res://Levels/Level2/Level2.tscn"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="8"]
+scroll_limit_end = Vector2( 0, 180 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_offset = Vector2( 0, -90 )
+motion_mirroring = Vector2( 320, 180 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
+texture = ExtResource( 7 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+motion_scale = Vector2( 0.2, 0.5 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2" index="0"]
+texture = ExtResource( 10 )
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
+motion_scale = Vector2( 0.26, 0.5 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3" index="0"]
+texture = ExtResource( 8 )
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground" index="3"]
+motion_scale = Vector2( 0.27, 0.5 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4" index="0"]
+texture = ExtResource( 9 )
+centered = false
