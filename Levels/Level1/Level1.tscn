@@ -14,6 +14,7 @@ _data = {
 }
 
 [node name="Level1" instance=ExtResource( 4 )]
+id = "577775b5-2a3e-4d30-88fa-11e154898632"
 
 [node name="Player" parent="." index="0"]
 position = Vector2( 69, 93 )

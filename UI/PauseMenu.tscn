@@ -23,30 +23,42 @@ margin_right = 264.0
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 margin_left = 90.0
-margin_top = 100.0
-margin_right = 230.0
-margin_bottom = 148.0
+margin_top = 71.0
+margin_right = 250.0
+margin_bottom = 187.0
 
 [node name="ContinueButton" type="Button" parent="Buttons"]
-margin_right = 140.0
-margin_bottom = 22.0
+margin_right = 160.0
+margin_bottom = 26.0
 text = "Continue"
 
+[node name="SaveButton" type="Button" parent="Buttons"]
+margin_top = 30.0
+margin_right = 160.0
+margin_bottom = 56.0
+text = "Save"
+
 [node name="QuitButton" type="Button" parent="Buttons"]
-margin_top = 26.0
-margin_right = 140.0
-margin_bottom = 48.0
+margin_top = 60.0
+margin_right = 160.0
+margin_bottom = 86.0
 text = "Quit"
+
+[node name="LoadButton" type="Button" parent="Buttons"]
+margin_top = 90.0
+margin_right = 160.0
+margin_bottom = 116.0
+text = "Load"
 
 [node name="PausedLabel" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -72.0
-margin_top = -21.0
-margin_right = 72.0
-margin_bottom = -5.0
+margin_left = -62.0
+margin_top = -33.0
+margin_right = 82.0
+margin_bottom = -17.0
 text = "Paused..."
 align = 1
 script = ExtResource( 5 )
@@ -59,5 +71,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [connection signal="pressed" from="Buttons/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="Buttons/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="timeout" from="PausedLabel/VisibilityTimer" to="PausedLabel" method="_on_VisibilityTimer_timeout"]

@@ -4,7 +4,7 @@
 [ext_resource path="res://Backgrounds/Sky/Sky.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/ParallaxCam.gd" type="Script" id=7]
 
-[node name="TitleMenu" type="Node2D"]
+[node name="TitleMenu" type="Node2D" groups=["Persist"]]
 
 [node name="ParallaxCam" type="Camera2D" parent="."]
 position = Vector2( 160, 90 )

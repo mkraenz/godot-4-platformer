@@ -2,6 +2,8 @@ extends Node2D
 
 const Player = preload("res://Player/Player.tscn")
 
+export var id: String
+
 onready var player = $Player
 onready var cam = $Cam
 onready var gevents = GEvents
@@ -10,13 +12,14 @@ onready var player_stats = PlayerStats
 var player_spawnpoint = Vector2.ZERO
 
 func _ready():
-	VisualServer.set_default_clear_color(Color.skyblue)
+	assert(id, "Missing id")
 
 	gevents.connect("hit_checkpoint", self, "_on_hit_checkpoint")
 	gevents.connect("player_died", self, "_on_player_died")
 	gevents.connect("player_fell_down", self, "_on_player_fell_down")
 
 	player_spawnpoint = player.global_position
+	player_stats.level_path = get_filename()
 	connect_player(player)
 
 func _on_player_died() -> void:

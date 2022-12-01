@@ -12,6 +12,7 @@
 [ext_resource path="res://Backgrounds/Sky/Sky.tscn" type="PackedScene" id=10]
 
 [node name="Level2" instance=ExtResource( 1 )]
+id = "020dcb72-7a88-4796-91fd-ee74937acc8b"
 
 [node name="TileMap" parent="." index="0" instance=ExtResource( 2 )]
 position = Vector2( 1, 0 )

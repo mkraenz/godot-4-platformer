@@ -21,6 +21,7 @@ _data = {
 }
 
 [node name="Playground" instance=ExtResource( 1 )]
+id = "220fb8b5-bda4-4b76-9dc3-735e87723f4c"
 
 [node name="Player" parent="." index="0"]
 position = Vector2( 178, 36 )
