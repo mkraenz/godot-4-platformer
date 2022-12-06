@@ -15,42 +15,61 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 level = ExtResource( 4 )
 
-[node name="Title" parent="." instance=ExtResource( 3 )]
-
-[node name="Buttons" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+[node name="V" type="VBoxContainer" parent="."]
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -80.0
-margin_top = -79.0
-margin_right = 80.0
-margin_bottom = -16.0
 
-[node name="ContinueButton" type="Button" parent="Buttons"]
+[node name="Title" parent="V" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 320.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+
+[node name="M" type="MarginContainer" parent="V"]
+margin_top = 84.0
+margin_right = 320.0
+margin_bottom = 180.0
+grow_vertical = 0
+size_flags_vertical = 3
+custom_constants/margin_right = 80
+custom_constants/margin_left = 80
+custom_constants/margin_bottom = 20
+
+[node name="Buttons" type="VBoxContainer" parent="V/M"]
+margin_left = 80.0
+margin_right = 240.0
+margin_bottom = 76.0
+alignment = 2
+
+[node name="ContinueButton" type="Button" parent="V/M/Buttons"]
+margin_top = 14.0
 margin_right = 160.0
-margin_bottom = 18.0
+margin_bottom = 32.0
 text = "Continue"
 script = ExtResource( 5 )
 
-[node name="NewGameButton" type="Button" parent="Buttons"]
-margin_top = 22.0
+[node name="NewGameButton" type="Button" parent="V/M/Buttons"]
+margin_top = 36.0
 margin_right = 160.0
-margin_bottom = 40.0
+margin_bottom = 54.0
 text = "New Game"
 script = ExtResource( 7 )
 level = ExtResource( 4 )
 
-[node name="QuitButton" type="Button" parent="Buttons"]
-margin_top = 44.0
+[node name="QuitButton" type="Button" parent="V/M/Buttons"]
+margin_top = 58.0
 margin_right = 160.0
-margin_bottom = 62.0
+margin_bottom = 76.0
 text = "Quit"
 script = ExtResource( 6 )
 
-[connection signal="mouse_entered" from="Buttons/ContinueButton" to="." method="_on_ContinueButton_mouse_entered"]
-[connection signal="pressed" from="Buttons/ContinueButton" to="Buttons/ContinueButton" method="_on_ContinueButton_pressed"]
-[connection signal="mouse_entered" from="Buttons/NewGameButton" to="." method="_on_NewGameButton_mouse_entered"]
-[connection signal="pressed" from="Buttons/NewGameButton" to="Buttons/NewGameButton" method="_on_NewGameButton_pressed"]
-[connection signal="mouse_entered" from="Buttons/QuitButton" to="." method="_on_QuitButton_mouse_entered"]
-[connection signal="pressed" from="Buttons/QuitButton" to="Buttons/QuitButton" method="_on_QuitButton_pressed"]
+[connection signal="mouse_entered" from="V/M/Buttons/ContinueButton" to="." method="_on_ContinueButton_mouse_entered"]
+[connection signal="pressed" from="V/M/Buttons/ContinueButton" to="V/M/Buttons/ContinueButton" method="_on_ContinueButton_pressed"]
+[connection signal="mouse_entered" from="V/M/Buttons/NewGameButton" to="." method="_on_NewGameButton_mouse_entered"]
+[connection signal="pressed" from="V/M/Buttons/NewGameButton" to="V/M/Buttons/NewGameButton" method="_on_NewGameButton_pressed"]
+[connection signal="mouse_entered" from="V/M/Buttons/QuitButton" to="." method="_on_QuitButton_mouse_entered"]
+[connection signal="pressed" from="V/M/Buttons/QuitButton" to="V/M/Buttons/QuitButton" method="_on_QuitButton_pressed"]

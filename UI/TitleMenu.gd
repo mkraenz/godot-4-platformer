@@ -2,10 +2,10 @@ extends Control
 
 export (PackedScene) var level
 
-onready var buttons = $Buttons
-onready var continue_button = $Buttons/ContinueButton
-onready var new_game_button = $Buttons/NewGameButton
-onready var quit_button = $Buttons/QuitButton
+onready var buttons = $V/M/Buttons
+onready var continue_button = $V/M/Buttons/ContinueButton
+onready var new_game_button = $V/M/Buttons/NewGameButton
+onready var quit_button = $V/M/Buttons/QuitButton
 
 var selectable_buttons := []
 var selected_index := 0 # the index within selectable_buttons of the currently selected/focused button
