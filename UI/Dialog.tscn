@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/MyTheme.tres" type="Theme" id=1]
-[ext_resource path="res://UI/IndicatorTriangle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/Keyboard/SpaceKey.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://UI/Dialog.gd" type="Script" id=4]
 
@@ -77,7 +77,8 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_horizontal = 9
 
-[node name="IndicatorTriangle" parent="M/Background/M/V/H2" instance=ExtResource( 2 )]
+[node name="SpaceKey" parent="M/Background/M/V/H2" instance=ExtResource( 2 )]
+position = Vector2( 162, 2 )
 
 [node name="Tween" type="Tween" parent="."]
 

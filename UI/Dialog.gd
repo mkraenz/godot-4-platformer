@@ -14,8 +14,10 @@ func _ready() -> void:
 	hide()
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
+	if finished and Input.is_action_just_pressed("ui_accept"):
 		hide()
+	if not finished and Input.is_action_just_pressed("ui_accept"):
+		skip_message()
 
 func display_message(message: String) -> void:
 	current_message = message
@@ -27,6 +29,11 @@ func display_message(message: String) -> void:
 		)
 	tween.start()
 	show()
+
+func skip_message():
+	tween.stop(text, "visible_characters")
+	text.visible_characters = len(current_message)
+	finished = true
 
 func _on_display_message(message: String) -> void:
 	display_message(message)

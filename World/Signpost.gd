@@ -1,6 +1,6 @@
 extends Area2D
 
-export var text := "Hello World"
+export var text := "Use WASD to move. W to interact."
 
 onready var gevents = GEvents
 onready var keyhint = $WKey
