@@ -37,6 +37,7 @@ tracks/0/keys = {
 [node name="WKey" type="Sprite"]
 position = Vector2( 0, -5 )
 scale = Vector2( 0.75, 0.75 )
+z_index = 50
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 14

@@ -22,10 +22,14 @@ region_rect = Rect2( 108, 72, 18, 18 )
 position = Vector2( 0, -9 )
 shape = SubResource( 1 )
 
-[node name="WKey" parent="." instance=ExtResource( 3 )]
+[node name="Keyhint" parent="." instance=ExtResource( 3 )]
 visible = false
+modulate = Color( 1, 1, 1, 0.588235 )
 position = Vector2( 0, -31 )
-z_index = 50
+
+[node name="KeyhintTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_Signpost_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Signpost_body_exited"]
+[connection signal="timeout" from="KeyhintTimer" to="." method="_on_KeyhintTimer_timeout"]

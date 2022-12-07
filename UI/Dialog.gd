@@ -2,7 +2,7 @@ extends Control
 
 export var text_speed := 0.05
 
-onready var text := $M/Background/M/V/H/Text
+onready var text := $M/BgOutline/M/Background/M/V/H/Text
 onready var tween := $Tween
 onready var gevents := GEvents
 

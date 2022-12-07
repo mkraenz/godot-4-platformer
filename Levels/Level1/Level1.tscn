@@ -52,6 +52,8 @@ target_level_path = "res://Levels/Level2/Level2.tscn"
 
 [node name="Signpost" parent="Interactables" index="2" instance=ExtResource( 8 )]
 position = Vector2( 99, 90 )
+text = "Use WASD to move. W to interact."
+wait_time_for_keyhint = 0.01
 
 [node name="LevelBottomLine" parent="." index="7"]
 position = Vector2( 118, 377 )
