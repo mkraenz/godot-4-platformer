@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/MyTheme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/IndicatorTriangle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://UI/Dialog.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="Dialog" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="M" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 70
+custom_constants/margin_top = 110
+custom_constants/margin_left = 70
+custom_constants/margin_bottom = 10
+
+[node name="Background" type="ColorRect" parent="M"]
+margin_left = 70.0
+margin_top = 110.0
+margin_right = 250.0
+margin_bottom = 170.0
+color = Color( 0.862745, 0.862745, 0.862745, 1 )
+
+[node name="M" type="MarginContainer" parent="M/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 0
+
+[node name="V" type="VBoxContainer" parent="M/Background/M"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 176.0
+margin_bottom = 60.0
+custom_constants/separation = 4
+alignment = 2
+
+[node name="H" type="HBoxContainer" parent="M/Background/M/V"]
+margin_right = 172.0
+margin_bottom = 44.0
+size_flags_vertical = 3
+
+[node name="Text" type="RichTextLabel" parent="M/Background/M/V/H"]
+margin_right = 172.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/default_color = Color( 0.117647, 0.117647, 0.117647, 1 )
+custom_constants/shadow_as_outline = 1
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "Hello this is [s]my first[/s] latest message. "
+visible_characters = 0
+percent_visible = 0.0
+text = "Hello this is my first latest message. "
+fit_content_height = true
+__meta__ = {
+"_editor_description_": "Black text is a workaround because the PressStart2P's Outline gets cropped on the left side of the first character with seemingly no way to fix the cropped font."
+}
+
+[node name="H2" type="HBoxContainer" parent="M/Background/M/V"]
+margin_top = 48.0
+margin_right = 172.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 9
+
+[node name="IndicatorTriangle" parent="M/Background/M/V/H2" instance=ExtResource( 2 )]
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

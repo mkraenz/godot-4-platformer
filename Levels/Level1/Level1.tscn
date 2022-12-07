@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/Checkpoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/WalkingEnemy.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemies/MovingSpiky.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Backgrounds/Sky/Sky.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Signpost.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -48,5 +49,11 @@ position = Vector2( 569, 11 )
 [node name="Door" parent="Interactables" index="1" instance=ExtResource( 3 )]
 position = Vector2( 1046, 20 )
 target_level_path = "res://Levels/Level2/Level2.tscn"
+
+[node name="Signpost" parent="Interactables" index="2" instance=ExtResource( 8 )]
+position = Vector2( 99, 90 )
+
+[node name="LevelBottomLine" parent="." index="7"]
+position = Vector2( 118, 377 )
 
 [node name="Sky" parent="." index="8" instance=ExtResource( 7 )]
