@@ -14,7 +14,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 38 ]
+"values": [ 10 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -40,7 +40,7 @@ scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 8
-frame = 26
+frame = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "press"
